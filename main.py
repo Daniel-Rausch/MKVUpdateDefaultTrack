@@ -45,7 +45,7 @@ def updateMKVFiles():
         if len(japaneseAudioTracks) > 1:
             logging.warning(f"Japanese audio track not unique. Found {len(japaneseAudioTracks)}. Using first track.")
         if len(englishSubtitleTracks) > 1:
-            logging.warning(f"English subtitle track not unique. Found {len(englishSubtitleTracks)}. Using first track.")
+            logging.warning(f"English subtitle track not unique. Found {len(englishSubtitleTracks)}. Using track {int(settings['OffsetEnglishSubtitle']) + 1}.")
         
         #Delete default tracks in file
         mkvPropeditPath = join(settings['MKVToolNixPath'], 'mkvpropedit.exe')
@@ -57,7 +57,8 @@ def updateMKVFiles():
         
         #Set new default tracks
         audioNumber = japaneseAudioTracks[0][1]
-        subNumber = englishSubtitleTracks[0][1]
+        subtitleToBeUsed = int(settings["OffsetEnglishSubtitle"]) % len(englishSubtitleTracks)
+        subNumber = englishSubtitleTracks[subtitleToBeUsed][1]
         stream = os.popen(f"\"{mkvPropeditPath}\" \"{filepath}\" --edit track:{audioNumber} --set flag-default=1")
         stream.close()
         stream = os.popen(f"\"{mkvPropeditPath}\" \"{filepath}\" --edit track:{subNumber} --set flag-default=1")

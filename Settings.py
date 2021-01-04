@@ -8,7 +8,8 @@ settings = {}
 __defaultSettings = {
     'LoggingLevel': 'INFO',
     'MKVToolNixPath': '', # Folder path where MKVToolNix is installed
-    'MKVFolderPath': '' # Path of the folder which contains the MKV files that should be updated
+    'MKVFolderPath': '', # Path of the folder which contains the MKV files that should be updated
+    'OffsetEnglishSubtitle': '0' # If there are multiple english subtitles: Choose which one is used (0 = first, 1 = second, and so on)
     }
 
 

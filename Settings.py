@@ -1,4 +1,4 @@
-from yaml import load, dump, YAMLError
+from yaml import load, dump, Loader, YAMLError
 
 import logging
 
@@ -16,7 +16,7 @@ __defaultSettings = {
 #Read the settings.yml file
 try:
     with open('settings.yml', 'r') as file:
-        settings = load(file)
+        settings = load(file, Loader=Loader)
         if settings is None:
             settings = {}
 except YAMLError as e:
